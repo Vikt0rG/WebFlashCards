@@ -31,8 +31,15 @@ chrome.contextMenus.onClicked.addListener(async (info) => {
     }
 });
 
+let badgeTimer = null;
+
 function flashBadge(text, color) {
+    if (badgeTimer) clearTimeout(badgeTimer);
+    
     chrome.action.setBadgeText({ text });
     chrome.action.setBadgeBackgroundColor({ color });
-    setTimeout(() => chrome.action.setBadgeText({ text: '' }), 1600);
+    
+    badgeTimer = setTimeout(() => {
+        chrome.action.setBadgeText({ text: '' });
+    }, 1600);
 }
