@@ -7,6 +7,17 @@
 // learn different languages
 const DEFAULT_SETTINGS = { sourceLang: 'fr', targetLang: 'en' };
 
+// Quick, DOM-less entity decoder for Service Workers
+function decodeHTMLEntities(text) {
+    return text
+        .replace(/&quot;/g, '"')
+        .replace(/&#39;/g, "'")
+        .replace(/&apos;/g, "'")
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+        .replace(/&amp;/g, '&');
+}
+
 /**
  * Calls the free MyMemory translation API.
  * Docs: https://mymemory.translated.net/doc/spec.php
@@ -26,11 +37,11 @@ export async function translateText(text, sourceLang, targetLang) {
     if (!res.ok) throw new Error(`Translation request failed (${res.status}).`);
 
     const data = await res.json();
-    const translated = data?.responseData?.translatedText;
-    if (!translated || data.responseStatus === 403) {
+    const rawTranslation = data?.responseData?.translatedText;
+    if (!rawTranslation || data.responseStatus === 403) {
         throw new Error(data?.responseDetails || 'No translation found.');
     }
-    return translated;
+    return decodeHTMLEntities(rawTranslation);
 }
 
 export async function getSettings() {
