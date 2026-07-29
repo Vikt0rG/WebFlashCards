@@ -1,7 +1,8 @@
 // background.js — Manifest V3 service worker.
 // Adds a right-click "Add to Vocab Library" action on any selected text.
 
-import { translateText, addFlashcard, getSettings } from './vocab-storage.js';
+import { translateText } from './vocab-storage.js';
+import { flashBadge, addFlashcard, getSettings } from './services/index.js';
 
 const MENU_ID = 'add-to-vocab-library';
 
