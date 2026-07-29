@@ -31,16 +31,3 @@ chrome.contextMenus.onClicked.addListener(async (info) => {
         flashBadge('!', '#B2402F');
     }
 });
-
-let badgeTimer = null;
-
-function flashBadge(text, color) {
-    if (badgeTimer) clearTimeout(badgeTimer);
-    
-    chrome.action.setBadgeText({ text });
-    chrome.action.setBadgeBackgroundColor({ color });
-    
-    badgeTimer = setTimeout(() => {
-        chrome.action.setBadgeText({ text: '' });
-    }, 1600);
-}
