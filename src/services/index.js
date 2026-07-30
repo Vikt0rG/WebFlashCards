@@ -11,3 +11,9 @@ export {
     getSettings,
     saveSettings
 } from './settings.js';
+
+export {
+    translateText
+} from './translation.js';
+
+export * from './vocabulary.js';
