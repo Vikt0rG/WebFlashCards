@@ -1,12 +1,10 @@
-let badgeTimer = null;
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-export function flashBadge(text, color) {
-    if (badgeTimer) clearTimeout(badgeTimer);
-    
-    chrome.action.setBadgeText({ text });
-    chrome.action.setBadgeBackgroundColor({ color });
-    
-    badgeTimer = setTimeout(() => {
-        chrome.action.setBadgeText({ text: '' });
-    }, 1600);
+export async function flashBadge(text, color) {
+    await chrome.action.setBadgeText({ text });
+    await chrome.action.setBadgeBackgroundColor({ color });
+
+    await delay(1600);
+
+    await chrome.action.setBadgeText({ text: '' });
 }
