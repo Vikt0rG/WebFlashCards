@@ -19,12 +19,16 @@ chrome.contextMenus.onClicked.addListener(async (info) => {
     const word = (info.selectionText || '').trim();
     if (!word) return;
 
-    const { sourceLang, targetLang } = await getSettings();
-
     try {
-        const translation = await translateText(word, sourceLang, targetLang);
-        const result = await addFlashcard({ word, translation, sourceLang, targetLang });
-        flashBadge(result.added ? '✓' : '•', result.added ? '#1F7A45' : '#8A8672');
+        const { sourceLang, targetLang } = await getSettings();
+
+        // TODO: Add translation functionality
+        // const translation = await translateText(word, sourceLang, targetLang);
+        const wordSaved = await saveWord(word);
+        flashBadge(wordSaved ? '✓' : '•', wordSaved ? '#1F7A45' : '#dbbc22');
+
+        // TODO: Flash card management
+        // const result = await addFlashcard({ word, translation, sourceLang, targetLang });
     } catch (err) {
         console.error('Vocab Library: could not file card ->', err);
         flashBadge('!', '#B2402F');
