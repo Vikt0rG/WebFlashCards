@@ -1,7 +1,3 @@
-// TODO: Add different source and target languages for each flashcard, so that a user can
-// learn different languages
-const DEFAULT_SETTINGS = { sourceLang: 'fr', targetLang: 'en' };
-
 // Quick, DOM-less entity decoder for Service Workers
 function decodeHTMLEntities(text) {
     return text

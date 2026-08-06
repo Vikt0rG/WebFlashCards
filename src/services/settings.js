@@ -1,3 +1,7 @@
+// TODO: Add different source and target languages for each flashcard, so that a user can
+// learn different languages
+const DEFAULT_SETTINGS = { sourceLang: 'fr', targetLang: 'en' };
+
 export async function getSettings() {
     const { settings } = await chrome.storage.local.get('settings');
     return { ...DEFAULT_SETTINGS, ...(settings || {}) };
