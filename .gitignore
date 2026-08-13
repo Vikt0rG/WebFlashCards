@@ -148,3 +148,6 @@ vite.config.ts.timestamp-*
 
 # Local stuff
 local/
+
+# VS Code settings
+.vscode/*
